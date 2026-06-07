@@ -79,6 +79,9 @@ var (
 		"NEW": UNPAID, "PENDING": PROCESSED, "COMPLETED": PAID,
 		"EXPIRED": CANCELED, "CANCELED": CANCELED, "RESOLVED": PAID, "UNRESOLVED": FAILED,
 	}
+	bepusdtStatuses = map[string]Status{
+		"1": UNPAID, "2": PAID, "3": CANCELED,
+	}
 	dummyStatuses = map[string]Status{
 		"paid": PAID,
 	}
@@ -104,6 +107,8 @@ func StatusPayment(system PaymentSystem, status string) Status {
 		statusBase = spectrocoinStatuses
 	case COINBASE:
 		statusBase = coinbaseStatuses
+	case BEPUSDT:
+		statusBase = bepusdtStatuses
 	case DUMMY:
 		statusBase = dummyStatuses
 	}

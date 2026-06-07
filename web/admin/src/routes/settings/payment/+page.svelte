@@ -6,6 +6,7 @@
   import Paypal from '$lib/components/payment/Paypal.svelte'
   import Spectrocoin from '$lib/components/payment/Spectrocoin.svelte'
   import Coinbase from '$lib/components/payment/Coinbase.svelte'
+  import Bepusdt from '$lib/components/payment/Bepusdt.svelte'
   import FormButton from '$lib/components/form/Button.svelte'
   import FormSelect from '$lib/components/form/Select.svelte'
   import { systemStore } from '$lib/stores/system'
@@ -19,7 +20,7 @@
   let t = $derived($translate)
 
   let drawerOpen = $state(false)
-  let drawerMode = $state<'stripe' | 'paypal' | 'spectrocoin' | 'coinbase' | null>(null)
+  let drawerMode = $state<'stripe' | 'paypal' | 'spectrocoin' | 'coinbase' | 'bepusdt' | null>(null)
   let payments = $state<Record<string, boolean>>({})
   let payment = $state<PaymentSettings>({
     currency: ''
@@ -78,7 +79,7 @@
     await saveSettings('payment', payment, 'Currency saved')
   }
 
-  function openDrawer(mode: 'stripe' | 'paypal' | 'spectrocoin' | 'coinbase') {
+  function openDrawer(mode: 'stripe' | 'paypal' | 'spectrocoin' | 'coinbase' | 'bepusdt') {
     drawerMode = mode
     drawerOpen = true
   }
@@ -171,6 +172,20 @@
         >
           Coinbase
         </div>
+        <div
+          class="ml-5 cursor-pointer rounded p-2 {payments.bepusdt ? 'bg-green-200' : 'bg-gray-200'}"
+          onclick={() => openDrawer('bepusdt')}
+          role="button"
+          tabindex="0"
+          onkeydown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              openDrawer('bepusdt')
+            }
+          }}
+        >
+          BEpusdt (USDT)
+        </div>
       </div>
     </div>
   </div>
@@ -186,6 +201,8 @@
       <Spectrocoin onclose={closeDrawer} />
     {:else if drawerMode === 'coinbase'}
       <Coinbase onclose={closeDrawer} />
+    {:else if drawerMode === 'bepusdt'}
+      <Bepusdt onclose={closeDrawer} />
     {/if}
   </Drawer>
 {/if}

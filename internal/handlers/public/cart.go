@@ -279,6 +279,24 @@ func Payment(c fiber.Ctx) error {
 		}
 		paymentURL = response.URL
 
+	case litepay.BEPUSDT:
+		setting, err := queries.GetSettingByGroup[models.Bepusdt](c.Context(), db)
+		if err != nil {
+			log.ErrorStack(err)
+			return webutil.StatusInternalServerError(c)
+		}
+
+		if !setting.Active {
+			return webutil.Response(c, fiber.StatusOK, "Payment url", paymentURL)
+		}
+		session := pay.Bepusdt(setting.ApiToken, setting.ApiURL)
+		response, err := session.Pay(cart)
+		if err != nil {
+			log.ErrorStack(err)
+			return webutil.StatusInternalServerError(c)
+		}
+		paymentURL = response.URL
+
 	case litepay.DUMMY:
 		// Dummy provider is always active and only for free carts (already validated above)
 		session := pay.Dummy()
@@ -366,6 +384,22 @@ func PaymentCallback(c fiber.Ctx) error {
 		payment.Coin = &litepay.Coin{
 			AmountTotal: response.ReceiveAmount,
 			Currency:    response.ReceiveCurrency,
+		}
+	case litepay.BEPUSDT:
+		response := new(litepay.CallbackBepusdt)
+		if err := c.Bind().Body(response); err != nil {
+			log.ErrorStack(err)
+			return webutil.StatusBadRequest(c, err.Error())
+		}
+		payment.Status = litepay.StatusPayment(litepay.BEPUSDT, fmt.Sprintf("%d", response.Status))
+		payment.MerchantID = response.TradeID
+		payment.Coin = &litepay.Coin{
+			AmountTotal: response.ActualAmount,
+			Currency:    "USDT",
+		}
+		// Use order_id from bepusdt callback as the cart_id if query param is empty
+		if payment.CartID == "" {
+			payment.CartID = response.OrderID
 		}
 	}
 

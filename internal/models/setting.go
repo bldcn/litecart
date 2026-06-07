@@ -118,6 +118,21 @@ func (v Coinbase) Validate() error {
 	)
 }
 
+// Bepusdt is ...
+type Bepusdt struct {
+	ApiToken string `json:"api_token"`
+	ApiURL   string `json:"api_url"`
+	Active   bool   `json:"active"`
+}
+
+// Validate is ...
+func (v Bepusdt) Validate() error {
+	return validation.ValidateStruct(&v,
+		validation.Field(&v.ApiToken, validation.Length(8, 200)),
+		validation.Field(&v.ApiURL, is.URL),
+	)
+}
+
 // Dummy is ...
 type Dummy struct {
 	Active bool `json:"active"`
@@ -130,6 +145,7 @@ type PaymentSystem struct {
 	Paypal      Paypal      `json:"paypal"`
 	Spectrocoin Spectrocoin `json:"spectrocoin"`
 	Coinbase    Coinbase    `json:"coinbase"`
+	Bepusdt     Bepusdt     `json:"bepusdt"`
 	Dummy       Dummy       `json:"dummy"`
 }
 

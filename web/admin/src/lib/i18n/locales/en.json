@@ -19,7 +19,9 @@
     "operationFailed": "Operation failed",
     "networkError": "Network error",
     "failedToLoadData": "Failed to load data",
-    "failedToSaveData": "Failed to save data"
+    "failedToSaveData": "Failed to save data",
+    "pageNotFound": "Page not found",
+    "redirecting": "Redirecting..."
   },
   "menu": {
     "products": "Products",
@@ -214,11 +216,15 @@
     "stripe": "Stripe",
     "paypal": "PayPal",
     "spectrocoin": "Spectrocoin",
+    "coinbase": "Coinbase",
+    "bepusdt": "BEpusdt (USDT)",
     "secretKey": "Secret Key",
     "clientId": "Client ID",
     "merchantId": "Merchant ID",
     "projectId": "Project ID",
     "privateKey": "Private key",
+    "apiToken": "API Token",
+    "apiUrl": "API URL",
     "failedToLoad": "Failed to load settings",
     "failedToSave": "Failed to save settings"
   },

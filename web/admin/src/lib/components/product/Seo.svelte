@@ -64,7 +64,7 @@
   <div class="pb-8">
     <div class="flex items-center">
       <div class="pr-3">
-        <h1>SEO</h1>
+        <h1>{t('products.seo')}</h1>
       </div>
     </div>
   </div>

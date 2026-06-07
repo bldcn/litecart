@@ -19,7 +19,9 @@
     "operationFailed": "操作失败",
     "networkError": "网络错误",
     "failedToLoadData": "加载数据失败",
-    "failedToSaveData": "保存数据失败"
+    "failedToSaveData": "保存数据失败",
+    "pageNotFound": "页面未找到",
+    "redirecting": "正在跳转..."
   },
   "menu": {
     "products": "商品",
@@ -214,11 +216,15 @@
     "stripe": "Stripe",
     "paypal": "PayPal",
     "spectrocoin": "Spectrocoin",
+    "coinbase": "Coinbase",
+    "bepusdt": "BEpusdt (USDT)",
     "secretKey": "密钥",
     "clientId": "客户端 ID",
     "merchantId": "商户 ID",
     "projectId": "项目 ID",
     "privateKey": "私钥",
+    "apiToken": "API 令牌",
+    "apiUrl": "API 地址",
     "failedToLoad": "加载设置失败",
     "failedToSave": "保存设置失败"
   },

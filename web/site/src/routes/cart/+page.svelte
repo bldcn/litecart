@@ -317,6 +317,25 @@
                       </label>
                     </div>
                   {/if}
+
+                  {#if payments.bepusdt}
+                    <div>
+                      <input
+                        type="radio"
+                        bind:group={provider}
+                        value="bepusdt"
+                        id="bepusdt"
+                        class="peer hidden"
+                      />
+                      <label
+                        for="bepusdt"
+                        class="block cursor-pointer border-4 border-black bg-white p-6 peer-checked:border-yellow-300 peer-checked:bg-yellow-300"
+                      >
+                        <p class="mb-2 text-xl font-black tracking-tight text-black uppercase">{t('cart.bepusdt')}</p>
+                        <p class="text-lg text-black">{t('cart.bepusdtDescription')}</p>
+                      </label>
+                    </div>
+                  {/if}
                 </fieldset>
               </div>
             {/if}
