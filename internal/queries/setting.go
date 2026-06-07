@@ -74,6 +74,12 @@ func (q *SettingQueries) GroupFieldMap(settings any) map[string]any {
 			"coinbase_api_key": &s.ApiKey,
 			"coinbase_active":  &s.Active,
 		}
+	case *models.Bepusdt:
+		return map[string]any{
+			"bepusdt_api_token": &s.ApiToken,
+			"bepusdt_api_url":   &s.ApiURL,
+			"bepusdt_active":    &s.Active,
+		}
 	case *models.Dummy:
 		return map[string]any{
 			"dummy_active": &s.Active,
